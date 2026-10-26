@@ -32,13 +32,13 @@ npm run dev
 Open `http://localhost:5173`.
 
 ## Deploy frontend and backend
-The frontend uses `VITE_API_BASE_URL` as the backend origin and defaults to `http://localhost:8009` for local development. To deploy the frontend to Vercel:
-1. Deploy the Spring Boot API to a public HTTPS host and configure its database connection using environment variables.
-2. In the Vercel project's **Settings → Environment Variables**, set `VITE_API_BASE_URL` to the backend origin (for example, `https://api.example.com`, without `/api`).
-3. Set `APP_CORS_ALLOWED_ORIGIN` in the backend host to the exact frontend origin (for example, `https://your-project.vercel.app`).
-4. Redeploy the frontend after setting its environment variable.
+The frontend uses `VITE_API_BASE_URL` as the backend origin and defaults to `http://localhost:8009` for local development. `frontend/.env.example` shows the local setting. Vite embeds `VITE_*` values at build time, so do not put secrets in frontend environment variables.
 
-The backend's CORS origin defaults to `http://localhost:5173` for local development. `frontend/.env.example` shows the local frontend setting. Vite embeds `VITE_*` values at build time, so do not put secrets in frontend environment variables.
+### Render frontend
+The repository includes `render.yaml` for deploying the React app as a Render Static Site. In Render, create a new **Blueprint** from this repository and provide `VITE_API_BASE_URL` as the origin of your public HTTPS backend (for example, `https://api.example.com`, without `/api`). The current web service is configured with the wrong root directory and a `yarn start` command. Create a new Static Site (service types cannot be converted) instead; it builds with `npm ci && npm run build` and publishes `frontend/dist`.
+
+### Backend requirements
+Deploy the Spring Boot API separately to a public HTTPS host and configure its database connection with that host's environment variables. Set `APP_CORS_ALLOWED_ORIGIN` on the backend to the exact frontend origin (for example, `https://your-site.onrender.com`). The backend CORS origin defaults to `http://localhost:5173` for local development.
 
 ## API
 - `GET /api/contacts` list records
