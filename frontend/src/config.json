@@ -1,0 +1,21 @@
+{
+  "title": "Contact Management Application",
+  "key": "contacts",
+  "fields": [
+    {
+      "name": "name",
+      "label": "Name",
+      "type": "text"
+    },
+    {
+      "name": "phone",
+      "label": "Phone",
+      "type": "tel"
+    },
+    {
+      "name": "email",
+      "label": "Email",
+      "type": "email"
+    }
+  ]
+}
