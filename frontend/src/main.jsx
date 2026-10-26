@@ -12,7 +12,8 @@ function App() {
   const [msgType, setMsgType] = useState('success');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const api = 'http://localhost:8009/api/' + config.key;
+  const apiBase = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:8009').replace(/\/+$/, '');
+  const api = `${apiBase}/api/${config.key}`;
 
   async function load() {
     try {
